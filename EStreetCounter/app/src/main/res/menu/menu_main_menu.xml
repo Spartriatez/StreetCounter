@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.armageddon.estreetcounter.MainMenu">
+    <item
+        android:id="@+id/saveMeasure"
+        android:orderInCategory="100"
+        android:title="Zapisz pomiar"
+        android:onClick="saveList"
+        app:actionLayout="@layout/switch_item"/>
+    <item
+        android:id="@+id/saveAs"
+        android:orderInCategory="101"
+        android:title="@string/action_saveAs"
+        android:onClick="saveAs"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/MeasureList"
+        android:title="Lista pomiarów"
+        android:onClick="showList"
+        app:actionLayout="@layout/switch_item"
+        android:orderInCategory="102" />
+</menu>
