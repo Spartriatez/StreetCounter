@@ -23,13 +23,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".StopWatch_Service" />
         <service android:name=".SaveData_Service" />
+
         <activity android:name=".CamImg" />
         <activity android:name=".SaveAs" />
         <activity android:name=".Measure_list" />
         <activity android:name=".GalleryImages" />
-        <activity android:name=".SelectedImage"></activity>
+        <activity android:name=".SelectedImage" />
+        <activity android:name=".SelectedTimes" />
+        <activity android:name=".GaleriaSImg"></activity>
     </application>
 
 </manifest>

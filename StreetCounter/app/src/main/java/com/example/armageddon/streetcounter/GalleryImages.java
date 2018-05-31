@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -39,6 +40,8 @@ public class GalleryImages extends AppCompatActivity {
     ArrayList<String> paths;
     ArrayList<String> images;
     ArrayList<Boolean> whoChecked;
+    ArrayList<String> nameProj;
+    ArrayList<Integer> id_street;
     @SuppressLint({"ResourceAsColor", "RestrictedApi"})
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -50,13 +53,18 @@ public class GalleryImages extends AppCompatActivity {
         scrolled=(ScrollView)findViewById(R.id.scrolled3);
         paths=new ArrayList<String>();
         images=new ArrayList<String>();
+        nameProj=new ArrayList<String>();
+        id_street=new ArrayList<Integer>();
         whoChecked=new ArrayList<Boolean>();
         Cursor cur=dbsqLite.returnImages();
+
         int counter=0;
         if(cur.getCount()>0){
             while (cur.moveToNext()){
                images.add(cur.getString(0));
                paths.add(cur.getString(1));
+               id_street.add(cur.getInt(2));
+               nameProj.add(cur.getString(3));
             }
 
             for(int i=0;i<paths.size();i++){
@@ -75,13 +83,14 @@ public class GalleryImages extends AppCompatActivity {
 
                         ImageView image = new ImageView(this);
                         image.setImageBitmap(bitmap);
-                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 500);
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(200, 200);
                         image.setLayoutParams(layoutParams);
 
                         LinearLayout parent = new LinearLayout(this);
 
                         parent.setOrientation(LinearLayout.VERTICAL);
                         parent.setPadding(60,0,20,0);
+                        parent.setGravity(Gravity.CENTER);
                         LinearLayout layout2 = new LinearLayout(this);
 
                         //layout2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -92,13 +101,14 @@ public class GalleryImages extends AppCompatActivity {
                         fab.setBackgroundTintList(ColorStateList.valueOf(R.color.colorPrimary));
                         fab.setSize(android.support.design.widget.FloatingActionButton.SIZE_MINI);
                         fab.setFocusable(true);
-                        fab.setPadding(100,0,10,0);
+                        fab.setPadding(100,0,10,50);
                         final int finalCounter = counter;
                         fab.setOnClickListener(new View.OnClickListener() {
                                                    @Override
                                                    public void onClick(View v) {
                                                        Intent intent=new Intent(getApplicationContext(),SelectedImage.class);
                                                        intent.putExtra("myImage",paths.get(finalCounter));
+                                                       intent.putExtra("whoGallery",1);
                                                        startActivity(intent);
                                                    }
                         });
@@ -132,9 +142,16 @@ public class GalleryImages extends AppCompatActivity {
                         layout2.addView(fab);
                         layout2.addView(acb);
 
+                        TextView tx1=new TextView(this);
+                        tx1.setText(String.valueOf(id_street.get(counter))+" "+nameProj.get(counter));
+                        tx1.setTextColor(Color.WHITE);
+                        tx1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f);
+                        //tx1.setPadding(150, 30, 50, 0);
+                        tx1.setGravity(Gravity.CENTER);
                         parent.addView(image);
-
+                        parent.addView(tx1);
                         parent.addView(layout2);
+
                         row.addView(parent);
                         counter++;
                     }else

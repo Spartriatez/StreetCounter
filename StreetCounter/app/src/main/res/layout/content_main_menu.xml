@@ -142,14 +142,15 @@
             android:layout_weight="2" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingActionButton6"
+            android:id="@+id/createImg"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_weight="1"
             android:clickable="true"
-            android:onClick="GetCamera"
+            android:onClick="makeImage"
             app:backgroundTint="?attr/colorPrimary"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            tools:ignore="OnClick" />
 
         <Space
             android:layout_width="wrap_content"
@@ -189,7 +190,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <EditText
+            <TextView
                 android:id="@+id/saveResult"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

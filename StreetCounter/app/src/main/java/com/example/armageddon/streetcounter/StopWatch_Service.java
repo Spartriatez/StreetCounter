@@ -70,11 +70,6 @@ public class StopWatch_Service  extends Service {
         }
     };
 
-    public Runnable runnable2 = new Runnable() {
-        public void run() {
-            handler.postDelayed(this,1000);
-        }
-    };
 
     public void startTime(){
         mIsRunning=true;
@@ -102,12 +97,9 @@ public class StopWatch_Service  extends Service {
         MilliSeconds = 0 ;
 
     }
-    public void startService(){
-        handler.postDelayed(runnable2, 0);
-    }
 
-    public void setSaveData(String data){
-        savedString=data;
+    public boolean valueRunning(){
+        return mIsRunning;
     }
 
 }
